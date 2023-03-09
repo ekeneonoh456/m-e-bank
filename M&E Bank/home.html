@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="styles.css" />
-		<script src="home.js"></script>
+		<!-- <script src="home.js"></script> -->
 	</head>
 
 	<body>
@@ -16,23 +16,39 @@
 
 		<form>
 			<div>
-				<label for="first-name">First name</label>
-				<input type="text" name="first-name" />
+				<label for="Deposit">Deposit</label>
+				<input type="text" name="deposit" id="addMoney" />
 			</div>
+			<button onclick="addMoney()" type="submit">Deposit</button>
 			<div>
-				<label for="last-name">Last name</label>
-				<input type="text" name="last-name" />
+				<label for="Withdraw">Withdraw</label>
+				<input type="text" name="withdraw" id="subtractMoney" />
 			</div>
-			<div>
-				<label for="JS-difficult">How difficult is JavaScript?</label>
-				<select name="JS-difficulty">
-					<option>Easy</option>
-					<option>Somewhere between</option>
-					<option>Hard</option>
-				</select>
-			</div>
-			<button type="submit">Submit</button>
+			<button onclick="subtractMoney()" type="submit">Withdraw</button>
 		</form>
 	</body>
+	<script>
+		if (!localStorage.getItem("balance")) {
+			// If not, set the counter to 0 in local storage
+			localStorage.setItem("balance", 0);
+		}
+
+		function addMoney() {
+			let balance = localStorage.getItem("balance");
+			balance = balance + document.getElementById("addMoney").value;
+			localStorage.setItem("balance", balance);
+		}
+		function subtractMoney() {
+			let balance = localStorage.getItem("balance");
+			balance = balance + document.getElementById("subtractMoney").value;
+			localStorage.setItem("balance", balance);
+		}
+
+		document.addEventListener("DOMContentLoaded", function () {
+			// Set heading to the current value inside local storage
+			document.querySelector("h1").innerHTML = localStorage.getItem("balance");
+			document.querySelector("button").onclick = balance;
+		});
+	</script>
 	<!-- Add a list to show the transaction histroy. -->
 </html>
